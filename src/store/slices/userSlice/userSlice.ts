@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthState, SignInResponse } from "../../../types/types";
+import { AuthState } from "../../../types/types";
 import { signInUserRequest } from "./requests";
 
-const initialState: AuthState<SignInResponse> = {
+const initialState: AuthState = {
     isLoading: false,
-    stateInstance: undefined
+    hasError: false,
 }
 const usersSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
+        clearError: (state) => {
+            state.hasError = false;
+            state.statusText = undefined;
+        }
     },
     selectors: {
     },
@@ -21,8 +25,14 @@ const usersSlice = createSlice({
            .addCase(signInUserRequest.fulfilled, (state, action) => {
             console.log(action.payload);
             
-                state.isLoading = false;
-                state.stateInstance = action.payload;
+           state.isLoading = false; 
+           if (action.payload === 'authorized') {
+            state.statusText = action.payload;
+            state.hasError = false;
+           } else {
+            state.statusText = action.payload;
+            state.hasError = true;
+           }
             })
             .addCase(signInUserRequest.rejected, (state) => {
                 state.isLoading = false;
@@ -32,4 +42,5 @@ const usersSlice = createSlice({
     
 
 });
+export const {clearError} = usersSlice.actions;
 export default usersSlice.reducer;

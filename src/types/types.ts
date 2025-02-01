@@ -8,8 +8,9 @@ export type SignInResponse = {
 }
 
 //User
-export interface AuthState<T> {
+export interface AuthState {
     isLoading: boolean;
-    stateInstance: T | undefined;
+    statusText?: string;
+    hasError: boolean;
 
 }

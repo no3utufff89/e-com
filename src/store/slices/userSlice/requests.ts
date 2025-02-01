@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
 import { SignInRequest } from "../../../types/types";
-import LoginService from "../../../services/loginService";
+import LoginService from "../../../services/LoginService";
 
 
 
@@ -10,16 +10,13 @@ export const signInUserRequest = createAsyncThunk(
     async (user: SignInRequest) => {
         const {idInstance, apiTokenInstance} = user;
         try {
-            const response = await LoginService.login(idInstance, apiTokenInstance);    
-            console.log(response);
-                   
+            const response = await LoginService.login(idInstance, apiTokenInstance);                   
             return response.data.stateInstance;
         } catch (error) {
             if(isAxiosError(error)) {
-                console.log(`error`, error.message);
-                
-                throw new Error('Network Errorsdfsdfsf');
-           
+                return error.message
+        } else if (error instanceof Error) {
+            return error.message;
         }
     }
     }

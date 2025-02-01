@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    
+}
+.sidebar {
+    max-width: 20%;
+    flex-grow: 1;
+    background-color: #111B21;
+    height: 100vh;
+    border-right: 1px solid gray;
+    color: white;
+ }
+ .main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #F0F2F5;
+    color: #000;
+ }
+ .addChatBtn {
+    transition: 0.2s ease-in-out;
+    &>svg {
+        transition: 0.2s ease-in-out;
+    }
+    &:hover {
+        scale: 1.2;
+       &>svg {
+        stroke: #7662ea;
+       }
+    }
+ }

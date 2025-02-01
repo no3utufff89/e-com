@@ -1,0 +1,9 @@
+.btn {
+    transition: 0.2s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
+    &:hover {
+        color: #7662ea;
+    }
+}
