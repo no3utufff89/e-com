@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { signInUserRequest } from "../../../store/slices/userSlice/requests";
 import { ErrorBlock } from "../../ErrorBlock/ErrorBlock";
 import { useEffect } from "react";
+import { setUser } from "../../../store/slices/userSlice/userSlice";
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
@@ -19,12 +20,11 @@ export const LoginForm = () => {
 
     const onSubmit = (data: SignInRequest) => {
         dispatch(signInUserRequest(data))
-       
+        dispatch(setUser(data));
     }
     useEffect(() => {
-        if(statusText === 'authorized') {
+        if(statusText === 'OK') {
             navigate('/');
-            
         }
     },[statusText])
     return (
@@ -87,7 +87,7 @@ export const LoginForm = () => {
                     <button className={`bg-violet text-white border rounded-lg h-[50px]`} type="submit">Sign in</button>
                 </form>
             ) : (
-                <ErrorBlock text={statusText} />
+                <ErrorBlock text={statusText as string} />
             )}
         </>
     )

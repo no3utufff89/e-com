@@ -4,13 +4,14 @@ export interface SignInRequest {
     apiTokenInstance: string;
 }
 export type SignInResponse = {
+    stateInstance: string;
+}
+export interface AuthResponse<T> {
     stateInstance: string | undefined;
-}
+    user: T | undefined;
+  }
 
-//User
-export interface AuthState {
-    isLoading: boolean;
-    statusText?: string;
-    hasError: boolean;
-
-}
+  //Phone
+  export interface NewPhone {
+    phone: string;
+  }

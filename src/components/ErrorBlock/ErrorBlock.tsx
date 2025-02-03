@@ -10,7 +10,6 @@ type IErrorProps = {
 
 export const ErrorBlock:React.FC<Partial<IErrorProps>> = (props) => {
     const dispatch = useAppDispatch();
-
     const handleClearError = () => {
         dispatch(clearError());
     }
